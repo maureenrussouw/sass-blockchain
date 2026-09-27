@@ -1,23 +1,46 @@
 import { CutCornerButton } from "../components/CutCornerButton";
+import { Hexagon } from "../components/Hexagon";
 
 export const HeroSection = () => {
   return (
-    <section className="py-24">
+    <section className="py-24 md:py-52 overflow-x-clip">
       <div className="container">
         <p className="uppercase font-extrabold text-center text-zinc-500 tracking-wider">
           Introducing Blockforge
         </p>
-        <h1 className="font-heading font-black text-5xl text-center mt-4">
+        <h1 className="font-heading font-black text-5xl lg:text-7xl  md:text-6xl text-center mt-4 max-w-2xl mx-auto">
           The Future of Blockchain is Here.
         </h1>
-        <p className="text-center text-xl mt-6 text-zinc-400">
-          Blockforge is poineering smart contract integrity with cutting-edge
-          data solutions.
+        <p className="text-center text-xl md:text-2xl mt-6 text-zinc-400 max-w-xl mx-auto">
+          Blockforge is poineering smart contract integrity with
+          cutting-edgeIcosahedron 3D Image data solutions.
         </p>
         <div className="flex justify-center mt-10">
           <CutCornerButton>Get Started</CutCornerButton>
         </div>
-        <img src="/assets/images/icosahedron.png" alt="Icosahedron 3D Image" />
+        <div className="flex justify-center mt-24">
+          <div className="inline-flex relative z-0">
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+              <Hexagon className="size-275" />
+            </div>
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+              <Hexagon className="size-[1800px]" />
+            </div>
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+              <img src="/assets/images/cube.png" alt="Cube 3D image" />
+            </div>
+            <img
+              src="/assets/images/icosahedron.png"
+              alt=""
+              className="absolute w-[calc(100%+100px)] max-w-none -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 saturate-10 brightness-4 hue-rotate-240"
+            />
+            <img
+              src="/assets/images/icosahedron.png"
+              alt="Icosahedron 3D Image"
+              className="w-125"
+            />
+          </div>
+        </div>
       </div>
     </section>
   );
