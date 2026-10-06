@@ -3,6 +3,7 @@ import { Card } from "../components/Card";
 import { getPostColorFromCategory } from "../utils/postUtils";
 import { Tag } from "../components/Tag";
 import { CutCornerButton } from "../components/CutCornerButton";
+import { twMerge } from "tailwind-merge";
 
 export const LatestPosts = (props: {
   latestPosts: CollectionEntry<"blog">[];
@@ -18,28 +19,57 @@ export const LatestPosts = (props: {
           Keep up with the newest trens, updates, and insights in the blockchain
           world, updated weekly.
         </p>
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
-          {latestPosts.map(
-            ({ data: { title, description, category } }, postIndex) => (
-              <Card
-                key={postIndex}
-                buttonText="Read More"
-                color={getPostColorFromCategory(category)}
-              >
-                <div>
-                  <Tag color={getPostColorFromCategory(category)}>
-                    {category}
-                  </Tag>
-                  <h3 className="font-heading font-black text-3xl mt-3 wrap-break-word">
-                    {title}
-                  </h3>
-                  <p className="text-lg text-zinc-400 mt-6">{description}</p>
-                </div>
-              </Card>
-            ),
-          )}
+        <div className="mt-16 md:mt-28 grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="flex flex-col gap-8">
+            {latestPosts.map(
+              ({ data: { title, description, category } }, postIndex) => (
+                <Card
+                  key={postIndex}
+                  buttonText="Read More"
+                  color={getPostColorFromCategory(category)}
+                  className={twMerge(
+                    (postIndex === 1 || postIndex === 3) && "md:hidden",
+                  )}
+                >
+                  <div>
+                    <Tag color={getPostColorFromCategory(category)}>
+                      {category}
+                    </Tag>
+                    <h3 className="font-heading font-black text-3xl mt-3 wrap-break-word">
+                      {title}
+                    </h3>
+                    <p className="text-lg text-zinc-400 mt-6">{description}</p>
+                  </div>
+                </Card>
+              ),
+            )}
+          </div>
+          <div className="hidden md:flex flex-col gap-8 mt-16">
+            {latestPosts.map(
+              ({ data: { title, description, category } }, postIndex) => (
+                <Card
+                  key={postIndex}
+                  buttonText="Read More"
+                  color={getPostColorFromCategory(category)}
+                  className={twMerge(
+                    (postIndex === 0 || postIndex === 2) && "md:hidden",
+                  )}
+                >
+                  <div>
+                    <Tag color={getPostColorFromCategory(category)}>
+                      {category}
+                    </Tag>
+                    <h3 className="font-heading font-black text-3xl mt-3 wrap-break-word">
+                      {title}
+                    </h3>
+                    <p className="text-lg text-zinc-400 mt-6">{description}</p>
+                  </div>
+                </Card>
+              ),
+            )}
+          </div>
         </div>
-        <div className="flex justify-center mt-48">
+        <div className="flex justify-center mt-48 md:mt-32">
           <CutCornerButton>Read the blog</CutCornerButton>
         </div>
       </div>
