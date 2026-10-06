@@ -48,15 +48,21 @@ export const FeaturesCardsSection = () => {
           <div className="flex flex-none gap-8">
             {cardData.map(({ id, image, title, description, color }) => (
               <Card key={id} className="max-w-xs md:max-w-md" color={color}>
-                <div
-                  className="relative z-0 p-8 md:p-10 max-w-xs md:max-w-md group"
-                  key={id}
-                >
-                  <h3 className="font-heading font-black text-3xl  m-12">
-                    {title}
-                  </h3>
-                  <p className="text-lg text-zinc-400 mt-4">{description}</p>
+                <div className="flex justify-center -mt-28">
+                  <div className="inline-flex relative">
+                    <div className="absolute h-4 w-full top-[calc(100%+16px)]  bg-zinc-950/70 group-hover:bg-zinc-950/30 transition duration-300 rounded-[100%] mask-[radial-gradient(closest-side,black,transparent)]"></div>
+                    <img
+                      src={image}
+                      alt="Pill Image"
+                      className="size-40 group-hover:-translate-y-6 transition duration-300"
+                    />
+                  </div>
                 </div>
+
+                <h3 className="font-heading font-black text-3xl  m-12">
+                  {title}
+                </h3>
+                <p className="text-lg text-zinc-400 mt-4">{description}</p>
               </Card>
             ))}
           </div>
