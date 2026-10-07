@@ -6,6 +6,8 @@ import { HeaderSection } from "../sections/Header";
 import { HeroSection } from "../sections/Hero";
 import { LatestPosts } from "../sections/LatestPosts";
 import { getCollection } from "astro:content"
+import { TestimonialsSection } from "../sections/Testimonials";
+import { CallToAction } from "../sections/CallToAction";
 const posts = await getCollection('blog')
 const latestPosts = posts.sort((a,b) => {
   if (a.data.pubDate.valueOf() === b.data.pubDate.valueOf()) return 0
@@ -19,4 +21,6 @@ const latestPosts = posts.sort((a,b) => {
   <FeaturesCardsSection />
   <FeaturesGrid />
   <LatestPosts latestPosts={latestPosts} />
+  <TestimonialsSection />
+  <CallToAction />?
 </DefaultLayout>
