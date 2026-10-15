@@ -6,11 +6,29 @@ import { motion, useScroll, useTransform } from "framer-motion";
 
 export const HeroSection = () => {
   const icosahedronRef = useRef(null);
+  const cubeRef = useRef(null);
+  const torusRef = useRef(null);
+  const cuboidRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: icosahedronRef,
     offset: ["start end", "end start"],
   });
+  const { scrollYProgress: cubeScrollYProgress } = useScroll({
+    target: cubeRef,
+    offset: ["start end", "end start"],
+  });
+  const { scrollYProgress: torusScrollYProgress } = useScroll({
+    target: torusRef,
+    offset: ["start end", "end start"],
+  });
+  const { scrollYProgress: cuboidScrollYProgress } = useScroll({
+    target: cuboidRef,
+    offset: ["start end", "end start"],
+  });
   const icosahedronRotate = useTransform(scrollYProgress, [0, 1], [30, -45]);
+  const cubeRotate = useTransform(cubeScrollYProgress, [0, 1], [100, -45]);
+  const torusRotate = useTransform(torusScrollYProgress, [0, 1], [20, -20]);
+  const cuboidRotate = useTransform(cuboidScrollYProgress, [0, 1], [20, -20]);
   return (
     <section className="py-24 md:py-52 overflow-x-clip">
       <div className="container">
@@ -37,28 +55,40 @@ export const HeroSection = () => {
             </div>
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
               <Circle className="absolute left-50 -top-225">
-                <img
+                <motion.img
                   src="/assets/images/cube.png"
                   alt="Cube 3D image"
                   className="size-35"
+                  style={{
+                    rotate: cubeRotate,
+                  }}
+                  ref={cubeRef}
                 />
               </Circle>
             </div>
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
               <Circle className="absolute left-50 top-67.5">
-                <img
+                <motion.img
                   src="/assets/images/cuboid.png"
                   alt="Cuboid 3D image"
                   className="size-35"
+                  ref={cuboidRef}
+                  style={{
+                    rotate: cuboidRotate,
+                  }}
                 />
               </Circle>
             </div>
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
               <Circle className="absolute -left-150 -top-20">
-                <img
+                <motion.img
                   src="/assets/images/torus.png"
                   alt="Torus 3D image"
                   className="size-35"
+                  ref={torusRef}
+                  style={{
+                    rotate: torusRotate,
+                  }}
                 />
               </Circle>
             </div>
