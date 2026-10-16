@@ -48,13 +48,18 @@ export const HeroSection = () => {
         <div className="flex justify-center mt-24">
           <div className="inline-flex relative z-0">
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-              <Hexagon className="size-275" />
+              <Hexagon className="size-275" size={1100} />
             </div>
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-              <Hexagon className="size-[1800px]" />
+              <Hexagon
+                className="size-[1800px]"
+                size={1800}
+                reverse
+                duration={60}
+              />
             </div>
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-              <Circle className="absolute left-50 -top-225">
+              <Circle className="absolute left-50 -top-225" animate>
                 <motion.img
                   src="/assets/images/cube.png"
                   alt="Cube 3D image"
@@ -67,7 +72,7 @@ export const HeroSection = () => {
               </Circle>
             </div>
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-              <Circle className="absolute left-50 top-67.5">
+              <Circle className="absolute left-50 top-67.5" animate>
                 <motion.img
                   src="/assets/images/cuboid.png"
                   alt="Cuboid 3D image"
