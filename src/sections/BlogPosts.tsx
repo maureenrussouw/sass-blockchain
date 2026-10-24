@@ -44,8 +44,15 @@ export const BlogPosts = ({ posts }: { posts: BlogPost[] }) => (
       <div>
         <div className="flex flex-col gap-12 mt-24">
           {posts.map(({ id, category, title, description }, postIndex) => (
-            <a
+            <motion.a
               key={id}
+              initial={{ opacity: 0.1, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: "some" }}
+              transition={{
+                duration: 0.5,
+                ease: "easeIn",
+              }}
               href={`/blog/${id}`}
               className={twMerge(postIndex % 2 === 0 ? "hidden" : "")}
             >
@@ -59,7 +66,7 @@ export const BlogPosts = ({ posts }: { posts: BlogPost[] }) => (
                 </h2>
                 <p className="text-lg mt-6 text-zinc-400">{description}</p>
               </Card>
-            </a>
+            </motion.a>
           ))}
         </div>
       </div>
