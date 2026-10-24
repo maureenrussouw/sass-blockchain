@@ -1,18 +1,21 @@
 ---
-import { Card } from "../../components/Card";
 import { CutCornerButton } from "../../components/CutCornerButton";
 import { Hexagon } from "../../components/Hexagon";
-import { Tag } from "../../components/Tag";
 import DefaultLayout from "../../layouts/Default.astro";
 import { HeaderSection } from "../../sections/Header";
+import { BlogPosts } from "../../sections/BlogPosts";
 import { getCollection } from "astro:content";
-import { getPostColorFromCategory } from "../../utils/postUtils";
-import { twMerge } from "tailwind-merge";
 
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 const latestPost = posts[0];
+const blogPosts = posts.map(({ id, data: { category, title, description } }) => ({
+  id,
+  category,
+  title,
+  description,
+}));
 ---
 
 <DefaultLayout>
@@ -43,58 +46,7 @@ const latestPost = posts[0];
       </div>
     </div>
   </section>
-  <section class="pb-[1000px]">
-    <div class="container">
-      <div class="grid grid-cols-2 gap-8">
-        <div class="flex flex-col gap-12">
-          {posts.map(
-            ({ id, data: { category, title, description } }, postIndex) => (
-              <a
-                href={`/blog/${id}`}
-                class={twMerge(postIndex % 2 === 0 ? "" : "hidden")}
-              >
-                <Card
-                  buttonText="Read More"
-                  color={getPostColorFromCategory(category)}
-                >
-                  <Tag color={getPostColorFromCategory(category)}>
-                    {category}
-                  </Tag>
-                  <h2 class="font-heading font-font-black text-3xl mt-4">
-                    {title}
-                  </h2>
-                  <p class="text-lg mt-6 text-zinc-400">{description}</p>
-                </Card>
-              </a>
-            ),
-          )}
-        </div>
-        <div>
-          <div class="flex flex-col gap-12">
-            {posts.map(
-              ({ id, data: { category, title, description } }, postIndex) => (
-                <a
-                  href={`/blog/${id}`}
-                  class={twMerge(postIndex % 2 === 0 ? "hidden" : "")}
-                >
-                  <Card
-                    buttonText="Read More"
-                    color={getPostColorFromCategory(category)}
-                  >
-                    <Tag color={getPostColorFromCategory(category)}>
-                      {category}
-                    </Tag>
-                    <h2 class="font-heading font-font-black text-3xl mt-4">
-                      {title}
-                    </h2>
-                    <p class="text-lg mt-6 text-zinc-400">{description}</p>
-                  </Card>
-                </a>
-              ),
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
+  <section class="pb-250">
+    <BlogPosts client:load posts={blogPosts} />
   </section>
 </DefaultLayout>
