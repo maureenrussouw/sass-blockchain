@@ -5,17 +5,22 @@ import DefaultLayout from "../../layouts/Default.astro";
 import { HeaderSection } from "../../sections/Header";
 import { BlogPosts } from "../../sections/BlogPosts";
 import { getCollection } from "astro:content";
+import { TestimonialsSection } from "../../sections/Testimonials";
+import { CallToAction } from "../../sections/CallToAction";
+import { Footer } from "../../sections/Footer";
 
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 const latestPost = posts[0];
-const blogPosts = posts.map(({ id, data: { category, title, description } }) => ({
-  id,
-  category,
-  title,
-  description,
-}));
+const blogPosts = posts.map(
+  ({ id, data: { category, title, description } }) => ({
+    id,
+    category,
+    title,
+    description,
+  }),
+);
 ---
 
 <DefaultLayout>
@@ -46,7 +51,10 @@ const blogPosts = posts.map(({ id, data: { category, title, description } }) => 
       </div>
     </div>
   </section>
-  <section class="pb-250">
+  <section class="py-32 bg-zinc-900/30 backdrop-blur-sm">
     <BlogPosts client:load posts={blogPosts} />
   </section>
+  <TestimonialsSection client:load />
+  <CallToAction client:load />
+  <Footer />
 </DefaultLayout>
