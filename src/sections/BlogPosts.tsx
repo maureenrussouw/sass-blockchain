@@ -13,8 +13,8 @@ type BlogPost = {
 
 export const BlogPosts = ({ posts }: { posts: BlogPost[] }) => (
   <div className="container">
-    <div className="grid grid-cols-2 gap-8">
-      <div className="flex flex-col gap-12">
+    <div className="grid grid-col-1 md:grid-cols-2 gap-8">
+      <div className="flex flex-col gap-8 lg:gap-12">
         {posts.map(({ id, category, title, description }, postIndex) => (
           <motion.a
             key={id}
@@ -26,7 +26,7 @@ export const BlogPosts = ({ posts }: { posts: BlogPost[] }) => (
               ease: "easeIn",
             }}
             href={`/blog/${id}`}
-            className={twMerge(postIndex % 2 === 0 ? "" : "hidden")}
+            className={twMerge(postIndex % 2 === 0 ? "" : "block md:hidden")}
           >
             <Card
               buttonText="Read More"
@@ -42,7 +42,7 @@ export const BlogPosts = ({ posts }: { posts: BlogPost[] }) => (
         ))}
       </div>
       <div>
-        <div className="flex flex-col gap-12 mt-24">
+        <div className="hidden md:flex flex-col gap-8 lg:gap-12 mt-24">
           {posts.map(({ id, category, title, description }, postIndex) => (
             <motion.a
               key={id}

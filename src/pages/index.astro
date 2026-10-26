@@ -1,28 +1,22 @@
 ---
+import { getCollection } from "astro:content";
 import DefaultLayout from "../layouts/Default.astro";
 import { FeaturesCardsSection } from "../sections/FeaturesCardsSection";
 import { FeaturesGrid } from "../sections/FeaturesGrid";
-import { HeaderSection } from "../sections/Header";
 import { HeroSection } from "../sections/Hero";
 import { LatestPosts } from "../sections/LatestPosts";
-import { getCollection } from "astro:content"
-import { TestimonialsSection } from "../sections/Testimonials";
-import { CallToAction } from "../sections/CallToAction";
-import { Footer } from "../sections/Footer";
-const posts = await getCollection('blog')
-const latestPosts = posts.sort((a,b) => {
-  if (a.data.pubDate.valueOf() === b.data.pubDate.valueOf()) return 0
-  return a.data.pubDate.valueOf() > b.data.pubDate.valueOf() ? -1 : 1
-}).slice(0,4)
+const posts = await getCollection("blog");
+const latestPosts = posts
+  .sort((a, b) => {
+    if (a.data.pubDate.valueOf() === b.data.pubDate.valueOf()) return 0;
+    return a.data.pubDate.valueOf() > b.data.pubDate.valueOf() ? -1 : 1;
+  })
+  .slice(0, 4);
 ---
 
 <DefaultLayout>
-  <HeaderSection client:load/>
   <HeroSection client:load />
   <FeaturesCardsSection client:load />
   <FeaturesGrid client:load />
   <LatestPosts client:load latestPosts={latestPosts} />
-  <TestimonialsSection client:load />
-  <CallToAction  client:load />
-  <Footer />
 </DefaultLayout>
